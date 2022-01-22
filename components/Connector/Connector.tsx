@@ -35,9 +35,6 @@ const Balance: React.FC = () => {
 
   const [balance, setBalance] = React.useState()
   React.useEffect(() => {
-    console.log("balance", balance)
-    console.log("account", account)
-    console.log("chainId", chainId)
     if (!!account && !!library) {
       let stale = false
 
@@ -112,11 +109,6 @@ const Header: React.FC = () => {
           )
         }
       </Box>
-
-      <Typography variant='body1' paragraph>
-        Balance:
-        <Balance />
-      </Typography>
     </Box>
   )
 }
