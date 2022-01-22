@@ -1,17 +1,8 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { useWeb3React } from "@web3-react/core";
-import {
-  NoEthereumProviderError,
-  UserRejectedRequestError as UserRejectedRequestErrorInjected,
-} from "@web3-react/injected-connector";
-import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from "@web3-react/walletconnect-connector";
 import { Web3Provider } from "@ethersproject/providers";
-import { formatEther } from "@ethersproject/units";
-
-import { Box, Button, Typography } from "@iotabots/components";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import { Box, Button } from "@iotabots/components";
 import { useEagerConnect, useInactiveListener } from "../../utils/hooks";
-import { ProfilePicture } from "../ProfilePicture";
 import Web3 from "web3";
 
 declare global {
