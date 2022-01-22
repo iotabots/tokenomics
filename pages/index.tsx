@@ -13,10 +13,10 @@ export const Home = ({ projects }): JSX.Element => (
           Tokenomics
         </Typography>
         <Typography variant="body2" align="center" sx={{ pb: 6 }}>
-          Attention: This a very early test and we will reset the chain somethimes so you will start again with 0 BENERGY.
+          Attention: This a very early test and we will reset the chain somethimes so you will start again with 0 BOLTS.
         </Typography>
         <Typography variant="body1" align="center" sx={{ pb: 6 }}>
-          You can mint 100 BENERGY with an IOTABOT each day.
+          You can mint 100 BOLTS with your IOTABOT each day.
         </Typography>
         <Connector />
         <Typography variant="body2" align="center" sx={{ pb: 6 }}>

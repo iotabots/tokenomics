@@ -22,12 +22,11 @@ declare global {
   }
 }
 
-const BENERGY_ABI = require("../../contracts/benergy.json");
 const IOTABOTS_ABI = require("../../contracts/iotabots.json");
+const BOLTS_ABI = require("../../contracts/bolts.json");
 
 const Balance: React.FC = () => {
-  const IOTABOTS_ADR = "0x55Ab23584315DCF58b1Ead853fF7d65D912C38fB";
-  const BENERGY_ADR = "0xBe28b9e20E8720b14629DBf62d87f8934b516c11";
+  const BOLTS_ADR = "0xBe28b9e20E8720b14629DBf62d87f8934b516c11";
   const context = useWeb3React<Web3Provider>();
   const { connector, chainId, library, account, deactivate, active, error } =
     context;
@@ -37,7 +36,7 @@ const Balance: React.FC = () => {
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider);
 
-    let contract = new web3.eth.Contract(BENERGY_ABI, BENERGY_ADR);
+    let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR);
     console.log("contract", contract);
     console.log("_account", _account);
     let data;
@@ -65,13 +64,12 @@ const Balance: React.FC = () => {
   return (
     <span>
       {/* eslint-disable-next-line no-nested-ternary */}
-      BENERGY Balance: {balance === null ? null : balance ? balance : "-"}
+      BOLTS Balance: {balance === null ? null : balance ? balance : "-"}
     </span>
   );
 };
 const AmountOfBots: React.FC = () => {
   const IOTABOTS_ADR = "0x689143C6C67032C684c81F5fB82F3dB9942cc295";
-  const BENERGY_ADR = "0x9807D12726D06cC03CB12afebCdbD3c3fc18f9d1";
   const context = useWeb3React<Web3Provider>();
   const { connector, chainId, library, account, deactivate, active, error } =
     context;
@@ -117,8 +115,7 @@ const AmountOfBots: React.FC = () => {
 };
 
 const RequestTokens: React.FC = () => {
-  const IOTABOTS_ADR = "0x689143C6C67032C684c81F5fB82F3dB9942cc295";
-  const BENERGY_ADR = "0x9807D12726D06cC03CB12afebCdbD3c3fc18f9d1";
+  const BOLTS_ADR = "0x9807D12726D06cC03CB12afebCdbD3c3fc18f9d1";
   const context = useWeb3React<Web3Provider>();
   const { connector, chainId, library, account, deactivate, active, error } =
     context;
@@ -129,7 +126,7 @@ const RequestTokens: React.FC = () => {
   const requestTokens = async function () {
     console.log("requestTokens", context.library.provider);
     const web3 = new Web3(context.library.provider);
-    let contract = new web3.eth.Contract(BENERGY_ABI, BENERGY_ADR);
+    let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR);
     console.log("contract", contract);
     let data;
     try {
@@ -146,7 +143,7 @@ const RequestTokens: React.FC = () => {
 
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider);
-    let contract = new web3.eth.Contract(BENERGY_ABI, BENERGY_ADR);
+    let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR);
     console.log("contract", contract);
     console.log("_account", account);
     console.log("web3", web3);
