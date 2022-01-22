@@ -112,11 +112,10 @@ const RequestTokens: React.FC = () => {
     context;
 
   const [balance, setBalance] = React.useState();
-  const [contract, setContract] = React.useState();
 
-  const requestTokens = async function () {
-    console.log("requestTokens", context.library.provider);
-    const web3 = new Web3(context.library.provider);
+  const requestTokens = async function (_provider) {
+    console.log("requestTokens", library.provider);
+    const web3 = new Web3();
     let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR);
     console.log("contract", contract);
     let data;
