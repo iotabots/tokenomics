@@ -19,9 +19,7 @@ export const Home = ({ projects }): JSX.Element => (
           You can mint 100 BOLTS with your IOTABOT each day.
         </Typography>
         <Connector />
-        <Typography variant="body2" align="center" sx={{ pb: 6 }}>
         <ERC20Balance />
-        </Typography>
         <Typography variant="body1" align="center" sx={{ pb: 6 }}>
           This is just for testing! Have fun!
         </Typography>

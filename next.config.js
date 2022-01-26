@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    RPC_URL_IOTA_EVM: 'https://evm.wasp.sc.iota-defi.com',
+    RPC_URL_IOTA_EVM: 'https://evm.wasp.sc.iota.org',
   },
 }
 

@@ -70,7 +70,7 @@ export const Navigation: React.FC = () => {
       // TODO - fetch current IOTABOT
       profilePicture = (
         <div className={classes.profilePicture}>
-          <Link href='/profile'>
+          <Link href='/home'>
             <Avatar
               alt='IOTABOT #1'
               src='https://assets.iotabots.io/compressed/1.png'
