@@ -20,9 +20,7 @@ export const Home = ({ projects }): JSX.Element => (
         </Typography>
         <Connector />
         <ERC20Balance />
-        <Typography variant="body1" align="center" sx={{ pb: 6 }}>
-          This is just for testing! Have fun!
-        </Typography>
+       
       </Container>
     </Box>
   </BaseLayout>
