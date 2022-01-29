@@ -116,7 +116,7 @@ export const Navigation: React.FC = () => {
             </Box>
           ))}
         </Box>
-        <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
           <ToggleMode />
           <Box sx={{ display: { xs: 'none', md: 'flex' }, ml: 3 }}>
             {profilePicture}
@@ -133,7 +133,7 @@ export const Navigation: React.FC = () => {
               {account ? profilePicture : <MoreIcon />}
             </IconButton>
           </Box>
-        </Box>
+        </Box> */}
       </Toolbar>
       <MobileMenu
         mobileMenuId={mobileMenuId}
