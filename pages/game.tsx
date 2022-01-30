@@ -3,11 +3,9 @@ import { useWeb3React } from '@web3-react/core'
 import { Box, Button, Container, Typography } from '@iotabots/components'
 import Web3 from 'web3'
 import BaseLayout from '../components/BaseLayout'
-import Setup from '../components/Game/Setup'
+import Snake from '../components/Game/Snake'
 import { AUTH_ADR } from '../config'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
-import Head from 'next/head'
 
 const AUTH_ABI = require('../contracts/auth.json')
 
@@ -38,7 +36,7 @@ export const Metaverse: React.FC = () => {
   React.useEffect(() => {
     if (!!account && !!library) {
       init(account, library)
-      Setup()
+      Snake()
     }
     return null
   }, [account, library, chainId])

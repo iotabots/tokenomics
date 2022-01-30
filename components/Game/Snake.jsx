@@ -14,7 +14,6 @@ export default async function Setup() {
         update: update,
       },
     }
-
     var game = new Phaser.Game(config)
   }
 
@@ -36,7 +35,7 @@ export default async function Setup() {
 
   function create() {
     console.log('Game is Created.')
-    var Food = new Phaser.Class({
+    let Food = new Phaser.Class({
       Extends: Phaser.GameObjects.Image,
 
       initialize: function Food(scene, x, y) {
