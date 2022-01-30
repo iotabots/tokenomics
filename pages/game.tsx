@@ -11,7 +11,10 @@ const AUTH_ABI = require('../contracts/auth.json')
 
 export const Metaverse: React.FC = () => {
   React.useEffect(() => {
-    Snake()
+
+    let array = [[0,0], [10,10], [20,20], [39,29]]
+
+    Snake(array)
   }, [])
 
   const { account, library, chainId } = useWeb3React()

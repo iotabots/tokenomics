@@ -1,4 +1,4 @@
-export default async function Setup() {
+export default async function Setup(footArray) {
   if (typeof window !== 'undefined') {
     const Phaser = await import('phaser')
 
@@ -27,6 +27,9 @@ export default async function Setup() {
   var LEFT = 2
   var RIGHT = 3
 
+  var footIndex = 0;
+  var round = 0;
+
   function preload() {
     this.load.image('food', 'assets/games/snake/food.png')
     this.load.image('body', 'assets/games/snake/body.png')
@@ -42,7 +45,7 @@ export default async function Setup() {
         Phaser.GameObjects.Image.call(this, scene)
 
         this.setTexture('food')
-        this.setPosition(x * 16, y * 16)
+        this.setPosition(x * 8, y * 8)
         this.setOrigin(0)
 
         this.total = 0
@@ -61,7 +64,7 @@ export default async function Setup() {
 
         this.body = scene.add.group()
 
-        this.head = this.body.create(x * 16, y * 16, 'body')
+        this.head = this.body.create(x * 8, y * 8, 'body')
         this.head.setOrigin(0)
 
         this.alive = true
@@ -153,8 +156,8 @@ export default async function Setup() {
         //  Update the body segments and place the last coordinate into this.tail
         Phaser.Actions.ShiftPosition(
           this.body.getChildren(),
-          this.headPosition.x * 16,
-          this.headPosition.y * 16,
+          this.headPosition.x * 8,
+          this.headPosition.y * 8,
           1,
           this.tail
         )
@@ -208,8 +211,8 @@ export default async function Setup() {
       updateGrid: function (grid) {
         //  Remove all body pieces from valid positions list
         this.body.children.each(function (segment) {
-          var bx = segment.x / 16
-          var by = segment.y / 16
+          var bx = segment.x / 8
+          var by = segment.y / 8
 
           grid[by][bx] = false
         })
@@ -227,9 +230,17 @@ export default async function Setup() {
   }
 
   function update(time, delta) {
+
+
+    if (round >= 500) {
+      alert("Time is up!")
+      snake.alive = false
+    }
+
     if (!snake.alive) {
       return
     }
+
 
     /**
      * Check which key is pressed, and then change the direction the snake
@@ -252,9 +263,11 @@ export default async function Setup() {
       //  If the snake updated, we need to check for collision against food
 
       if (snake.collideWithFood(food)) {
-        repositionFood()
+        repositionFoodNew()
       }
     }
+    round++;
+    console.log("round", round)
   }
 
   /**
@@ -298,13 +311,25 @@ export default async function Setup() {
     if (validLocations.length > 0) {
       //  Use the RNG to pick a random food position
       var pos = Phaser.Math.RND.pick(validLocations)
-
+      console.log("pos.x", pos.x)
+      console.log("pos.y", pos.y)
       //  And place it
-      food.setPosition(pos.x * 16, pos.y * 16)
+      food.setPosition(pos.x * 8, pos.y * 8)
 
       return true
     } else {
       return false
     }
+  }
+
+
+  function repositionFoodNew() {
+
+    console.log("footArray", footArray)
+    console.log("footIndex", footIndex)
+    let pos = footArray[footIndex % footArray.length]
+    food.setPosition(pos[0] * 8, pos[1] * 8)
+    footIndex++
+    
   }
 }
