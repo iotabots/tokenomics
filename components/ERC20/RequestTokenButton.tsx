@@ -3,6 +3,7 @@ import { Web3Provider } from '@ethersproject/providers'
 import { Button } from '@iotabots/components'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
+import { useRouter } from 'next/router'
 
 const BOLTS_ABI = require('../../contracts/bolts.json')
 const { BOLTS_ADR } = require('../../config')
@@ -11,13 +12,14 @@ export const RequestTokenButton: React.FC = () => {
   const context = useWeb3React<Web3Provider>()
   const { connector, chainId, library, account, deactivate, active, error } =
     context
+  const router = useRouter()
 
   const [balance, setBalance] = React.useState()
 
   const requestTokens = async function () {
     // @ts-ignore: Unreachable code error
     const web3 = new Web3(library.provider)
-    console.log(web3, "requestTokens")
+    console.log(web3, 'requestTokens')
     let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR)
     let data
     try {
@@ -25,7 +27,8 @@ export const RequestTokenButton: React.FC = () => {
         .requestTokens()
         .send({ from: context.account, gasPrice: '0' })
       setBalance(data)
-      console.log(data, "data")
+      console.log(data, 'data')
+      router.reload()
     } catch (e) {
       console.log(e)
       return null
