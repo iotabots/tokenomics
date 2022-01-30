@@ -10,6 +10,10 @@ import { useRouter } from 'next/router'
 const AUTH_ABI = require('../contracts/auth.json')
 
 export const Metaverse: React.FC = () => {
+  React.useEffect(() => {
+    Snake()
+  }, [])
+
   const { account, library, chainId } = useWeb3React()
   const router = useRouter()
 
@@ -36,7 +40,6 @@ export const Metaverse: React.FC = () => {
   React.useEffect(() => {
     if (!!account && !!library) {
       init(account, library)
-      Snake()
     }
     return null
   }, [account, library, chainId])
@@ -53,7 +56,7 @@ export const Metaverse: React.FC = () => {
               ? 'You are logged In :-)'
               : 'Your are Not logged in :-('}
           </Typography>
-          <div id="game"></div>
+          <div id='game'></div>
         </Container>
       </Box>
     </BaseLayout>

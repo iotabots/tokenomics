@@ -4,8 +4,8 @@ export default async function Setup() {
 
     var config = {
       type: Phaser.WEBGL,
-      width: 640,
-      height: 480,
+      width: 320,
+      height: 240,
       backgroundColor: '#bfcc00',
       parent: 'game',
       scene: {
