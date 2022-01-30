@@ -10,7 +10,7 @@ export const AmountOfBots: React.FC = () => {
   const { connector, chainId, library, account, deactivate, active, error } =
     context
 
-  const [amount, setAmount] = React.useState()
+  const [amount, setAmount] = React.useState(0)
 
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider)
