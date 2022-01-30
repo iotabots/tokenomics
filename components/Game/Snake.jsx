@@ -1,4 +1,4 @@
-export default async function Setup(footArray) {
+export default async function Setup(footArray, callback) {
   if (typeof window !== 'undefined') {
     const Phaser = await import('phaser')
 
@@ -230,14 +230,16 @@ export default async function Setup(footArray) {
   }
 
   function update(time, delta) {
-
-
-    if (round >= 500) {
-      alert("Time is up!")
-      snake.alive = false
-    }
-
+  
     if (!snake.alive) {
+      return
+    }
+    if (round >= 1000) {
+      //alert("Time is up!")
+      snake.alive = false
+      console.log("send callback")
+      callback(food.total)
+      console.log("end callback")
       return
     }
 
@@ -266,8 +268,7 @@ export default async function Setup(footArray) {
         repositionFoodNew()
       }
     }
-    round++;
-    console.log("round", round)
+    round++; // count up the round
   }
 
   /**
