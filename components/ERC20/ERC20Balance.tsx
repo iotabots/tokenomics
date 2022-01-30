@@ -8,6 +8,7 @@ import { RequestTokenButton } from './RequestTokenButton'
 import { Balance } from './Balance'
 import { TotalSupply } from './TotalSupply'
 import { AmountOfBots } from './AmountOfBots'
+import { MintTimer } from './MintTimer'
 const { BOLTS_ADR } = require('../../config')
 
 declare global {
@@ -22,6 +23,7 @@ const ERC20Balance: React.FC = () => {
   const context = useWeb3React<Web3Provider>()
   const { connector, library, account, deactivate, active, error } = context
 
+  const [canMint, SetCanMint] = React.useState(false)
   // handle logic to recognize the connector currently being activated
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [activatingConnector, setActivatingConnector] = React.useState<any>()
@@ -45,7 +47,10 @@ const ERC20Balance: React.FC = () => {
       <br />
       <AmountOfBots />
       <br />
-      <RequestTokenButton />
+      { canMint 
+      ? <RequestTokenButton />
+      : <MintTimer />
+    }
       <Typography variant='body1' align='center' sx={{ pb: 6 }}>
         This is just for testing! Have fun!
       </Typography>
