@@ -45,7 +45,6 @@ export const Metaverse: React.FC = () => {
         .send({ from: account, gasPrice: '0' })
 
       console.log('data', data)
-      // router.reload(window.location.pathname)
       router.reload()
 
     } catch (e) {
