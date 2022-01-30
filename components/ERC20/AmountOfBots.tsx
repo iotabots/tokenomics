@@ -21,6 +21,8 @@ export const AmountOfBots: React.FC = () => {
       data = await contract.methods.walletOfOwner(_account).call()
       if (data.length > 0) {
         setAmount(data.length)
+      } else {
+        setAmount(0)
       }
     } catch (e) {
       console.log(e)
