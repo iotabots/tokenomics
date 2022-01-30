@@ -17,6 +17,7 @@ export const RequestTokenButton: React.FC = () => {
   const requestTokens = async function () {
     // @ts-ignore: Unreachable code error
     const web3 = new Web3(library.provider)
+    console.log(web3, "requestTokens")
     let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR)
     let data
     try {
@@ -24,6 +25,7 @@ export const RequestTokenButton: React.FC = () => {
         .requestTokens()
         .send({ from: context.account, gasPrice: '0' })
       setBalance(data)
+      console.log(data, "data")
     } catch (e) {
       console.log(e)
       return null
