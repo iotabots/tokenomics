@@ -5,9 +5,9 @@ import '../styles/globals.scss'
 import { Web3Provider } from '@ethersproject/providers'
 import { Web3ReactProvider } from '@web3-react/core'
 import { AppProps } from 'next/dist/shared/lib/router/router'
-import { Navigation } from '../components/Navigation/Navigation'
-import { Footer } from '../components/Footer'
+import ActiveLink from '../components/ActiveLink'
 import { SEO } from '../config'
+import { Navigation } from '@iotabots/components'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getLibrary = (provider: any): Web3Provider => {
@@ -15,6 +15,12 @@ const getLibrary = (provider: any): Web3Provider => {
   library.pollingInterval = 1000
   return library
 }
+
+const MENU = [
+  <ActiveLink href='/' label='Tokenomics' />,
+  <ActiveLink href='/metaverse' label='Metaverse' />,
+  <ActiveLink href='/game' label='Game' />,
+]
 
 const YOUR_TRACKING_ID = 'G-YTZ512CCQL'
 
@@ -33,6 +39,13 @@ const App: React.FC<AppProps> = (props) => {
         <link rel='icon' type='image/png' sizes='16x16' href='favicon.ico' />
         <link rel='manifest' href='favicon/site.webmanifest' />
         <link rel='mask-icon' href='/safari-pinned-tab.svg' color='#20c593' />
+        <link rel='preconnect' href='https://fonts.googleapis.com' />
+        <link rel='preconnect' href='https://fonts.gstatic.com' />
+        <link
+          href='https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Sarpanch:wght@800&display=swap'
+          rel='stylesheet'
+        />
+
         <meta name='msapplication-TileColor' content='#da532c' />
         <meta name='theme-color' content='#ffffff' />
         <meta key='description' name='description' content={SEO.description} />
@@ -65,9 +78,8 @@ const App: React.FC<AppProps> = (props) => {
       </Head>
       <ThemeProvider>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <Navigation />
+          <Navigation identity menu={MENU} mobileMenu={MENU} />
           <Component {...pageProps} />
-          <Footer />
         </Web3ReactProvider>
       </ThemeProvider>
     </>

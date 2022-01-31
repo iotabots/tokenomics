@@ -3,13 +3,15 @@ import Avatar from '@mui/material/Avatar'
 import CssBaseline from '@mui/material/CssBaseline'
 import FormControlLabel from '@mui/material/FormControlLabel'
 import {
+  BaseLayout,
   Button,
   Typography,
   Grid,
   Box,
   Checkbox,
+  Section,
   TextField,
-  Link as ExternalLink
+  Link as ExternalLink,
 } from '@iotabots/components'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined'
 import { useRouter } from 'next/router'
@@ -42,8 +44,8 @@ export default function SignUp() {
   const [contract, setContract] = React.useState(undefined)
   const { account, library, chainId } = useWeb3React()
   const router = useRouter()
-  const [password, setPassword] = React.useState("")
-  const [name, setName] = React.useState("")
+  const [password, setPassword] = React.useState('')
+  const [name, setName] = React.useState('')
 
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider)
@@ -87,101 +89,108 @@ export default function SignUp() {
   }
 
   return (
-    <Grid container sx={{ height: '100vh' }}>
-      <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage:
-            'url(https://iotabots.io/assets/projects/metaverse.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) =>
-            t.palette.mode === 'light'
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <Grid item xs={12} sm={8} md={5}>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography variant='h5'>Sign Up</Typography>
-          <Typography pt='6px' noWrap variant='body1' paragraph>
-            {`${account?.substring(0, 4)}...${account?.substring(
-              // eslint-disable-next-line no-unsafe-optional-chaining
-              account?.length - 3,
-              account?.length
-            )}` || '-'}
-          </Typography>
-          <Typography pt='6px' variant='body1' paragraph>
-            Choose your favorite nickname and a secure new passwort. Have fun!
-          </Typography>
-          <Box sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              id='name'
-              label='Your Metaverse name'
-              name='name'
-              onChange={(event: any) => setName(event.target.value)}
-              autoFocus
-            />
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              onChange={(event: any) => setPassword(event.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button
-              onClick={signup}
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+    <BaseLayout>
+      <Section>
+        <Grid container sx={{ height: '100vh' }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              backgroundImage:
+                'url(https://iotabots.io/assets/projects/metaverse.jpg)',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light'
+                  ? t.palette.grey[50]
+                  : t.palette.grey[900],
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <Grid item xs={12} sm={8} md={5}>
+            <Box
+              sx={{
+                my: 8,
+                mx: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Sign Up
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href='#'>
-                  <Typography variant='body2' sx={{ cursor: 'pointer' }}>Forgot password?</Typography>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href='login'>
-                  <Typography variant='body2' sx={{ cursor: 'pointer' }}>
-                    {'Already have an account? Login'}
-                  </Typography>
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 5 }} />
-          </Box>
-        </Box>
-      </Grid>
-    </Grid>
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography variant='h5'>Sign Up</Typography>
+              <Typography pt='6px' noWrap variant='body1' paragraph>
+                {`${account?.substring(0, 4)}...${account?.substring(
+                  // eslint-disable-next-line no-unsafe-optional-chaining
+                  account?.length - 3,
+                  account?.length
+                )}` || '-'}
+              </Typography>
+              <Typography pt='6px' variant='body1' paragraph>
+                Choose your favorite nickname and a secure new passwort. Have
+                fun!
+              </Typography>
+              <Box sx={{ mt: 1 }}>
+                <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  id='name'
+                  label='Your Metaverse name'
+                  name='name'
+                  onChange={(event: any) => setName(event.target.value)}
+                  autoFocus
+                />
+                <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  onChange={(event: any) => setPassword(event.target.value)}
+                />
+                <FormControlLabel
+                  control={<Checkbox value='remember' color='primary' />}
+                  label='Remember me'
+                />
+                <Button
+                  onClick={signup}
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign Up
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href='#'>
+                      <Typography variant='body2' sx={{ cursor: 'pointer' }}>
+                        Forgot password?
+                      </Typography>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href='login'>
+                      <Typography variant='body2' sx={{ cursor: 'pointer' }}>
+                        {'Already have an account? Login'}
+                      </Typography>
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Copyright sx={{ mt: 5 }} />
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Section>
+    </BaseLayout>
   )
 }

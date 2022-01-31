@@ -7,7 +7,9 @@ import {
   Box,
   Checkbox,
   TextField,
-  Link as ExternalLink
+  Link as ExternalLink,
+  BaseLayout,
+  Section,
 } from '@iotabots/components'
 import CssBaseline from '@mui/material/CssBaseline'
 import FormControlLabel from '@mui/material/FormControlLabel'
@@ -40,7 +42,7 @@ function Copyright(props: any) {
 
 export default function Login() {
   const [contract, setContract] = React.useState(undefined)
-  const [password, setPassword] = React.useState("")
+  const [password, setPassword] = React.useState('')
   const { account, library, chainId } = useWeb3React()
   const router = useRouter()
 
@@ -86,93 +88,99 @@ export default function Login() {
   }
 
   return (
-    <Grid container sx={{ height: '100vh' }}>
-      <CssBaseline />
-      <Grid
-        item
-        xs={false}
-        sm={4}
-        md={7}
-        sx={{
-          backgroundImage:
-            'url(https://iotabots.io/assets/projects/metaverse.jpg)',
-          backgroundRepeat: 'no-repeat',
-          backgroundColor: (t) =>
-            t.palette.mode === 'light'
-              ? t.palette.grey[50]
-              : t.palette.grey[900],
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
-      />
-      <Grid item xs={12} sm={8} md={5}>
-        <Box
-          sx={{
-            my: 8,
-            mx: 4,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography variant='h5'>Log in</Typography>
-          <Typography pt='6px' noWrap variant='body1' paragraph>
-            {`${account?.substring(0, 4)}...${account?.substring(
-              // eslint-disable-next-line no-unsafe-optional-chaining
-              account?.length - 3,
-              account?.length
-            )}` || '-'}
-          </Typography>
-          <Typography pt='6px' variant='body1' paragraph>
-            Log in the Metaverse and explore the new web3 with IOTABOTS. Have
-            fun!
-          </Typography>
-          <Box sx={{ mt: 1 }}>
-            <TextField
-              margin='normal'
-              required
-              fullWidth
-              name='password'
-              label='Password'
-              type='password'
-              id='password'
-              autoComplete='current-password'
-              onChange={(event: any) => setPassword(event.target.value)}
-            />
-            <FormControlLabel
-              control={<Checkbox value='remember' color='primary' />}
-              label='Remember me'
-            />
-            <Button
-              onClick={login}
-              type='submit'
-              fullWidth
-              variant='contained'
-              sx={{ mt: 3, mb: 2 }}
+    <BaseLayout>
+      <Section>
+        <Grid container sx={{ height: '100vh' }}>
+          <CssBaseline />
+          <Grid
+            item
+            xs={false}
+            sm={4}
+            md={7}
+            sx={{
+              backgroundImage:
+                'url(https://iotabots.io/assets/projects/metaverse.jpg)',
+              backgroundRepeat: 'no-repeat',
+              backgroundColor: (t) =>
+                t.palette.mode === 'light'
+                  ? t.palette.grey[50]
+                  : t.palette.grey[900],
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
+          <Grid item xs={12} sm={8} md={5}>
+            <Box
+              sx={{
+                my: 8,
+                mx: 4,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
             >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href='#'>
-                  <Typography variant='body2' sx={{ cursor: 'pointer' }}>Forgot password?</Typography>
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href='signup'>
-                  <Typography variant='body2' sx={{ cursor: 'pointer' }}>
-                    {"Don't have an account? Sign Up"}
-                  </Typography>
-                </Link>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ mt: 5 }} />
-          </Box>
-        </Box>
-      </Grid>
-    </Grid>
+              <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography variant='h5'>Log in</Typography>
+              <Typography pt='6px' noWrap variant='body1' paragraph>
+                {`${account?.substring(0, 4)}...${account?.substring(
+                  // eslint-disable-next-line no-unsafe-optional-chaining
+                  account?.length - 3,
+                  account?.length
+                )}` || '-'}
+              </Typography>
+              <Typography pt='6px' variant='body1' paragraph>
+                Log in the Metaverse and explore the new web3 with IOTABOTS.
+                Have fun!
+              </Typography>
+              <Box sx={{ mt: 1 }}>
+                <TextField
+                  margin='normal'
+                  required
+                  fullWidth
+                  name='password'
+                  label='Password'
+                  type='password'
+                  id='password'
+                  autoComplete='current-password'
+                  onChange={(event: any) => setPassword(event.target.value)}
+                />
+                <FormControlLabel
+                  control={<Checkbox value='remember' color='primary' />}
+                  label='Remember me'
+                />
+                <Button
+                  onClick={login}
+                  type='submit'
+                  fullWidth
+                  variant='contained'
+                  sx={{ mt: 3, mb: 2 }}
+                >
+                  Sign In
+                </Button>
+                <Grid container>
+                  <Grid item xs>
+                    <Link href='#'>
+                      <Typography variant='body2' sx={{ cursor: 'pointer' }}>
+                        Forgot password?
+                      </Typography>
+                    </Link>
+                  </Grid>
+                  <Grid item>
+                    <Link href='signup'>
+                      <Typography variant='body2' sx={{ cursor: 'pointer' }}>
+                        {"Don't have an account? Sign Up"}
+                      </Typography>
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Copyright sx={{ mt: 5 }} />
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+      </Section>
+    </BaseLayout>
   )
 }

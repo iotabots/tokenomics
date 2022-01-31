@@ -1,25 +1,22 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Box, Button, Container, Typography } from '@iotabots/components'
+import { BaseLayout, Button, Container, Section, Typography } from '@iotabots/components'
 import Web3 from 'web3'
-import BaseLayout from '../components/BaseLayout'
 import Snake from '../components/Game/Snake'
 import { GAMEDUEL_ADR } from '../config'
-import { useRouter } from 'next/router'
 
 const GAMEDUEL_ABI = require('../contracts/gameduel.json')
 
 export const Metaverse: React.FC = () => {
-  React.useEffect(() => {}, [])
 
   const { account, library, chainId } = useWeb3React()
-  const router = useRouter()
 
   const [gameDuelContract, setGameDuelContract] = React.useState(undefined)
   const [gameId, setgameId] = React.useState(0)
   const [games, setGames] = React.useState([])
   const [gamesCount, setGamesCount] = React.useState(0)
 
+  // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const playRanked = async function () {
     let data
     try {
@@ -47,9 +44,10 @@ export const Metaverse: React.FC = () => {
           .publishScore(_gameId, params)
           .send({ from: account, gasPrice: '0' })
         console.log('data test:', data)
+        
       }
-
       Snake(config, callback)
+      return true
     } catch (e) {
       console.log('init error', e)
       return null
@@ -101,7 +99,7 @@ export const Metaverse: React.FC = () => {
   }, [account, library, chainId])
   return (
     <BaseLayout>
-      <Box py={8} bgcolor='background.default'>
+      <Section>
         <Container maxWidth='md'>
           <Typography variant='h3' sx={{ pb: 6 }}>
             Game
@@ -125,16 +123,15 @@ export const Metaverse: React.FC = () => {
             Last Games
           </Typography>
           <Button onClick={playRanked}>Play Ranked</Button>
-          {games.map(function (game, index) {
-            return (
+          {games.map((game, index) => (
               <Typography variant='body2' color='text.secondary' align='center'>
                 Player 1: {game.player1}
                 Player 2: {game.player2}
               </Typography>
             )
-          })}
+          )}
         </Container>
-      </Box>
+      </Section>
     </BaseLayout>
   )
 }

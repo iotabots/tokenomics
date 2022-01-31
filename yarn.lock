@@ -1439,9 +1439,9 @@
   dependencies:
     "@ethersproject/logger" "^5.5.0"
 
-"@ethersproject/providers@^5.5.1":
+"@ethersproject/providers@^5.5.2":
   version "5.5.2"
-  resolved "https://registry.npmjs.org/@ethersproject/providers/-/providers-5.5.2.tgz"
+  resolved "https://registry.yarnpkg.com/@ethersproject/providers/-/providers-5.5.2.tgz#131ccf52dc17afd0ab69ed444b8c0e3a27297d99"
   integrity sha512-hkbx7x/MKcRjyrO4StKXCzCpWer6s97xnm34xkfPiarhtEUVAN4TBBpamM+z66WcTt7H5B53YwbRj1n7i8pZoQ==
   dependencies:
     "@ethersproject/abstract-provider" "^5.5.0"
@@ -1605,16 +1605,16 @@
   resolved "https://registry.npmjs.org/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@iotabots/components@^0.0.15":
-  version "0.0.15"
-  resolved "https://registry.npmjs.org/@iotabots/components/-/components-0.0.15.tgz"
-  integrity sha512-6QSUu9u35PoR6JT8e+sDyZ8XWfjtsgQa+3YBhrwXh5FzFxcNkzARJ6NjxOUp/k/UIXYSZtWqlQNCVgOLKB5TXA==
+"@iotabots/components@^0.0.35":
+  version "0.0.35"
+  resolved "https://registry.yarnpkg.com/@iotabots/components/-/components-0.0.35.tgz#19a89783d7dc12edb235587117025e97a6fa1c66"
+  integrity sha512-YzXIdCI/LNIbWpFOHKgZEzNXSCFRMx6yorpcAoiLVBzrJRQsOihzSuwN1lIKlEmrnJNyt5hj2BH+tu/3sBQ6Hg==
   dependencies:
     "@date-io/date-fns" "^1.3.13"
     "@date-io/moment" "^1.3.13"
     "@emotion/react" "^11.6.0"
     "@emotion/styled" "^11.6.0"
-    "@ethersproject/providers" "^5.5.1"
+    "@ethersproject/providers" "^5.5.2"
     "@mui/icons-material" "^5.2.0"
     "@mui/lab" "^5.0.0-alpha.56"
     "@mui/material" "^5.2.0"
@@ -1639,6 +1639,7 @@
     react-scripts "4.0.3"
     react-syntax-highlighter "^15.4.3"
     web-vitals "^1.0.1"
+    web3 "^1.6.1"
 
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
@@ -14125,9 +14126,9 @@ web3-utils@1.7.0:
     randombytes "^2.1.0"
     utf8 "3.0.0"
 
-web3@^1.7.0:
+web3@^1.6.1, web3@^1.7.0:
   version "1.7.0"
-  resolved "https://registry.npmjs.org/web3/-/web3-1.7.0.tgz"
+  resolved "https://registry.yarnpkg.com/web3/-/web3-1.7.0.tgz#5867cd10a2bebb5c33fc218368e3f6f826f6897e"
   integrity sha512-n39O7QQNkpsjhiHMJ/6JY6TaLbdX+2FT5iGs8tb3HbIWOhPm4+a7UDbr5Lkm+gLa9aRKWesZs5D5hWyEvg4aJA==
   dependencies:
     web3-bzz "1.7.0"

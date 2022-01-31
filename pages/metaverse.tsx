@@ -1,8 +1,15 @@
 import React from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Box, Button, Container, Typography } from '@iotabots/components'
+import {
+  BaseLayout,
+  Box,
+  Button,
+  Container,
+  Section,
+  SectionHeader,
+  Typography,
+} from '@iotabots/components'
 import Web3 from 'web3'
-import BaseLayout from '../components/BaseLayout'
 import { AUTH_ADR } from '../config'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -21,10 +28,10 @@ export const Metaverse: React.FC = () => {
 
     try {
       console.log('checkIsUserLogged', account)
-      if(contract ) {
+      if (contract) {
         // @ts-ignore: Type error
         let data = await contract?.methods.checkIsUserLogged(account).call()
-        
+
         console.log('data', data)
         SetIsLoggedIn(data[0])
       } else {
@@ -46,7 +53,6 @@ export const Metaverse: React.FC = () => {
 
       console.log('data', data)
       router.reload()
-
     } catch (e) {
       console.log('Err', e)
     }
@@ -94,8 +100,10 @@ export const Metaverse: React.FC = () => {
     } else {
       return (
         <div>
-           <Typography variant='body1' sx={{ pb: 6 }}>
-            This is the mini metaverse - you can create an account and login to the secret space. The Web-Application only interacts with an Smart Contract. Have Fun!
+          <Typography variant='body1' sx={{ pb: 6 }}>
+            This is the mini metaverse - you can create an account and login to
+            the secret space. The Web-Application only interacts with an Smart
+            Contract. Have Fun!
           </Typography>
           <Button
             className='btn--primary'
@@ -119,12 +127,9 @@ export const Metaverse: React.FC = () => {
 
   return (
     <BaseLayout>
-      <Box py={8} bgcolor='background.default'>
+      <Section>
+        <SectionHeader title="Mini Metaverse" subtitle="Discover the new web3." />
         <Container maxWidth='md'>
-          <Typography variant='h3' sx={{ pb: 6 }}>
-            Mini Metaverse
-          </Typography>
-         
 
           <Typography variant='h6' sx={{ pb: 6 }}>
             {isLoggedIn
@@ -134,7 +139,7 @@ export const Metaverse: React.FC = () => {
 
           <Body />
         </Container>
-      </Box>
+      </Section>
     </BaseLayout>
   )
 }

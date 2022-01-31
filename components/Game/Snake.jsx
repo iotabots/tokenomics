@@ -27,8 +27,8 @@ export default async function Setup(footArray, callback) {
   var LEFT = 2
   var RIGHT = 3
 
-  var footIndex = 0;
-  var round = 0;
+  var footIndex = 0
+  var round = 0
 
   function preload() {
     this.load.image('food', 'assets/games/snake/food.png')
@@ -230,19 +230,17 @@ export default async function Setup(footArray, callback) {
   }
 
   function update(time, delta) {
-  
     if (!snake.alive) {
       return
     }
     if (round >= 1000) {
       //alert("Time is up!")
       snake.alive = false
-      console.log("send callback")
+      console.log('send callback')
       callback(food.total)
-      console.log("end callback")
+      console.log('end callback')
       return
     }
-
 
     /**
      * Check which key is pressed, and then change the direction the snake
@@ -268,7 +266,7 @@ export default async function Setup(footArray, callback) {
         repositionFoodNew()
       }
     }
-    round++; // count up the round
+    round++ // count up the round
   }
 
   /**
@@ -312,8 +310,8 @@ export default async function Setup(footArray, callback) {
     if (validLocations.length > 0) {
       //  Use the RNG to pick a random food position
       var pos = Phaser.Math.RND.pick(validLocations)
-      console.log("pos.x", pos.x)
-      console.log("pos.y", pos.y)
+      console.log('pos.x', pos.x)
+      console.log('pos.y', pos.y)
       //  And place it
       food.setPosition(pos.x * 8, pos.y * 8)
 
@@ -323,14 +321,11 @@ export default async function Setup(footArray, callback) {
     }
   }
 
-
   function repositionFoodNew() {
-
-    console.log("footArray", footArray)
-    console.log("footIndex", footIndex)
+    console.log('footArray', footArray)
+    console.log('footIndex', footIndex)
     let pos = footArray[footIndex % footArray.length]
     food.setPosition(pos[0] * 8, pos[1] * 8)
     footIndex++
-    
   }
 }
