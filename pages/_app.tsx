@@ -8,6 +8,7 @@ import { AppProps } from 'next/dist/shared/lib/router/router'
 import ActiveLink from '../components/ActiveLink'
 import { SEO } from '../config'
 import { Navigation } from '@iotabots/components'
+import Logo from '../components/Logo'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getLibrary = (provider: any): Web3Provider => {
@@ -78,7 +79,7 @@ const App: React.FC<AppProps> = (props) => {
       </Head>
       <ThemeProvider>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <Navigation identity menu={MENU} mobileMenu={MENU} />
+          <Navigation logo={<Logo />} identity menu={MENU} mobileMenu={MENU} />
           <Component {...pageProps} />
         </Web3ReactProvider>
       </ThemeProvider>

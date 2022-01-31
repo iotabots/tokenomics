@@ -1,6 +1,13 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { useWeb3React } from '@web3-react/core'
-import { BaseLayout, Button, Container, Section, Typography } from '@iotabots/components'
+import {
+  BaseLayout,
+  Button,
+  Container,
+  Section,
+  Typography,
+} from '@iotabots/components'
 import Web3 from 'web3'
 import Snake from '../components/Game/Snake'
 import { GAMEDUEL_ADR } from '../config'
@@ -8,13 +15,14 @@ import { GAMEDUEL_ADR } from '../config'
 const GAMEDUEL_ABI = require('../contracts/gameduel.json')
 
 export const Metaverse: React.FC = () => {
-
   const { account, library, chainId } = useWeb3React()
 
   const [gameDuelContract, setGameDuelContract] = React.useState(undefined)
   const [gameId, setgameId] = React.useState(0)
   const [games, setGames] = React.useState([])
   const [gamesCount, setGamesCount] = React.useState(0)
+
+  const router = useRouter()
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const playRanked = async function () {
@@ -44,7 +52,7 @@ export const Metaverse: React.FC = () => {
           .publishScore(_gameId, params)
           .send({ from: account, gasPrice: '0' })
         console.log('data test:', data)
-        
+        router.reload()
       }
       Snake(config, callback)
       return true
@@ -81,7 +89,7 @@ export const Metaverse: React.FC = () => {
       }
       console.log('tempGames', tempGames)
       if (tempGames.length > 0) {
-        setGames(tempGames)
+        setGames(tempGames.reverse())
       } else {
         setGames([])
       }
@@ -104,6 +112,7 @@ export const Metaverse: React.FC = () => {
           <Typography variant='h3' sx={{ pb: 6 }}>
             Game
           </Typography>
+          <Button onClick={playRanked}>Play Ranked</Button>
           <div id='game'></div>
 
           <Typography variant='h6' color='text.secondary' align='center'>
@@ -119,17 +128,45 @@ export const Metaverse: React.FC = () => {
           <Typography variant='body2' color='text.secondary' align='center'>
             Games played in total: {gamesCount}
           </Typography>
-          <Typography variant='body2' color='text.secondary' align='center'>
-            Last Games
+          <Typography variant='h5' color='text.secondary' align='center'>
+            History
           </Typography>
-          <Button onClick={playRanked}>Play Ranked</Button>
-          {games.map((game, index) => (
-              <Typography variant='body2' color='text.secondary' align='center'>
-                Player 1: {game.player1}
-                Player 2: {game.player2}
-              </Typography>
-            )
-          )}
+          <table style={{ fontSize: '10px' }}>
+            <thead>
+              <th>Player1</th>
+              <th>Points</th>
+              <th>Player2</th>
+              <th>Points</th>
+            </thead>
+            <tbody>
+              {games.map((game, index) => (
+                <tr>
+                  <td>
+                    {`${game.player1?.substring(
+                      0,
+                      4
+                    )}...${game.player1?.substring(
+                      // eslint-disable-next-line no-unsafe-optional-chaining
+                      game.player1?.length - 3,
+                      game.player1?.length
+                    )}` || '-'}
+                  </td>
+                  <td>{game.player1Points}</td>
+                  <td>
+                    {`${game.player2?.substring(
+                      0,
+                      4
+                    )}...${game.player2?.substring(
+                      // eslint-disable-next-line no-unsafe-optional-chaining
+                      game.player2?.length - 3,
+                      game.player2?.length
+                    )}` || '-'}
+                  </td>
+                  <td>{game.player2Points}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </Container>
       </Section>
     </BaseLayout>
