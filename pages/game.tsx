@@ -5,20 +5,24 @@ import {
   BaseLayout,
   Button,
   Container,
+  Grid,
   Section,
+  SectionHeader,
   Typography,
 } from '@iotabots/components'
 import Web3 from 'web3'
 import Snake from '../components/Game/Snake'
+import GameInfo from '../components/GameInfo'
 import { GAMEDUEL_ADR } from '../config'
 
 const GAMEDUEL_ABI = require('../contracts/gameduel.json')
 
-export const Metaverse: React.FC = () => {
+export const Games: React.FC = () => {
   const { account, library, chainId } = useWeb3React()
 
   const [gameDuelContract, setGameDuelContract] = React.useState(undefined)
   const [gameId, setgameId] = React.useState(0)
+  const [gameActive, setGameActive] = React.useState(false)
   const [games, setGames] = React.useState([])
   const [gamesCount, setGamesCount] = React.useState(0)
 
@@ -26,6 +30,7 @@ export const Metaverse: React.FC = () => {
 
   // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
   const playRanked = async function () {
+    setGameActive(true)
     let data
     try {
       // Get Games
@@ -62,6 +67,14 @@ export const Metaverse: React.FC = () => {
     }
   }
 
+  const printIcon = function (game, player) {
+    if (player === game.winner) {
+      return '👑'
+    } else if (game.winner === '0x000000000000000000000000000000000000dEaD') {
+      return '⚔️'
+    }
+  }
+
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider)
     const _gameDuelContract = new web3.eth.Contract(GAMEDUEL_ABI, GAMEDUEL_ADR)
@@ -76,12 +89,12 @@ export const Metaverse: React.FC = () => {
       let count = data
 
       // only last 3 games
-      if (count > 5) {
+      if (count >= 5) {
         count = 5
       }
       // get Last Games
       let tempGames = []
-      for (let i = 0; i < count; i++) {
+      for (let i = data - 1; i >= count; i--) {
         data = await _gameDuelContract.methods.games(i).call()
         console.log('game id', i)
         console.log('game', data)
@@ -89,7 +102,7 @@ export const Metaverse: React.FC = () => {
       }
       console.log('tempGames', tempGames)
       if (tempGames.length > 0) {
-        setGames(tempGames.reverse())
+        setGames(tempGames)
       } else {
         setGames([])
       }
@@ -108,69 +121,75 @@ export const Metaverse: React.FC = () => {
   return (
     <BaseLayout>
       <Section>
-        <Container maxWidth='md'>
-          <Typography variant='h3' sx={{ pb: 6 }}>
-            Game
-          </Typography>
-          <Button onClick={playRanked}>Play Ranked</Button>
-          <div id='game'></div>
+        <Container maxWidth='lg'>
+          <Grid container spacing={6}>
+            <Grid item xs={6}>
+              {gameActive ? (
+                <div id='game' />
+              ) : (
+                <GameInfo
+                  image='/thumgnail'
+                  title='Botchain'
+                  subtitle='A snake like game, called botchain.'
+                />
+              )}
+            </Grid>
+            <Grid item xs={6}>
+              <Button onClick={playRanked}>Play Ranked</Button>
 
-          <Typography variant='h6' color='text.secondary' align='center'>
-            Game Info
-          </Typography>
-          <Typography variant='body2' color='text.secondary' align='center'>
-            gameId: {gameId}
-          </Typography>
-
-          <Typography variant='h6' color='text.secondary' align='center'>
-            All Games
-          </Typography>
-          <Typography variant='body2' color='text.secondary' align='center'>
-            Games played in total: {gamesCount}
-          </Typography>
-          <Typography variant='h5' color='text.secondary' align='center'>
-            History
-          </Typography>
-          <table style={{ fontSize: '10px' }}>
-            <thead>
-              <th>Player1</th>
-              <th>Points</th>
-              <th>Player2</th>
-              <th>Points</th>
-            </thead>
-            <tbody>
-              {games.map((game, index) => (
-                <tr>
-                  <td>
-                    {`${game.player1?.substring(
-                      0,
-                      4
-                    )}...${game.player1?.substring(
-                      // eslint-disable-next-line no-unsafe-optional-chaining
-                      game.player1?.length - 3,
-                      game.player1?.length
-                    )}` || '-'}
-                  </td>
-                  <td>{game.player1Points}</td>
-                  <td>
-                    {`${game.player2?.substring(
-                      0,
-                      4
-                    )}...${game.player2?.substring(
-                      // eslint-disable-next-line no-unsafe-optional-chaining
-                      game.player2?.length - 3,
-                      game.player2?.length
-                    )}` || '-'}
-                  </td>
-                  <td>{game.player2Points}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+              <Typography variant='h6' color='text.secondary' align='center'>
+                All Games
+              </Typography>
+              <Typography variant='body2' color='text.secondary' align='center'>
+                Games played in total: {gamesCount}
+              </Typography>
+              <Typography variant='h5' color='text.secondary' align='center'>
+                History
+              </Typography>
+              <table style={{ fontSize: '10px' }}>
+                <thead>
+                  <th>Player1</th>
+                  <th>Points</th>
+                  <th>Player2</th>
+                  <th>Points</th>
+                </thead>
+                <tbody>
+                  {games.map((game, index) => (
+                    <tr id={`game-history-${index}`}>
+                      <td>
+                        {printIcon(game)}
+                        {`${game.player1?.substring(
+                          0,
+                          4
+                        )}...${game.player1?.substring(
+                          // eslint-disable-next-line no-unsafe-optional-chaining
+                          game.player1?.length - 3,
+                          game.player1?.length
+                        )}` || '-'}
+                      </td>
+                      <td>{game.player1Points}</td>
+                      <td>
+                        {printIcon(game)}
+                        {`${game.player2?.substring(
+                          0,
+                          4
+                        )}...${game.player2?.substring(
+                          // eslint-disable-next-line no-unsafe-optional-chaining
+                          game.player2?.length - 3,
+                          game.player2?.length
+                        )}` || '-'}
+                      </td>
+                      <td>{game.player2Points}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Grid>
+          </Grid>
         </Container>
       </Section>
     </BaseLayout>
   )
 }
 
-export default Metaverse
+export default Games

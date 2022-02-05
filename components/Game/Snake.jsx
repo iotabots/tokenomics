@@ -6,7 +6,7 @@ export default async function Setup(footArray, callback) {
       type: Phaser.WEBGL,
       width: 320,
       height: 240,
-      backgroundColor: '#bfcc00',
+      backgroundColor: '#0FD698',
       parent: 'game',
       scene: {
         preload: preload,
