@@ -19,7 +19,7 @@ const GameInfo: React.FC<GameInfoProps> = (props) => {
         backgroundPosition: 'center',
       }} />
       <Typography variant='h1'>{title}</Typography>
-      <Typography variant='subtitle'>{subtitle}</Typography>
+      <Typography variant='subtitle1'>{subtitle}</Typography>
     </Box>
   );
 };

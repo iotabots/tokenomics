@@ -21,6 +21,8 @@ const MENU = [
   <ActiveLink href='/' label='Tokenomics' />,
   <ActiveLink href='/metaverse' label='Metaverse' />,
   <ActiveLink href='/game' label='Game' />,
+  <ActiveLink href='/pixelbots' label='Pixelbots' />,
+  <ActiveLink href='/chat' label='Chat' />,
 ]
 
 const YOUR_TRACKING_ID = 'G-YTZ512CCQL'

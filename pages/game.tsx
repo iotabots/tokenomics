@@ -157,7 +157,7 @@ export const Games: React.FC = () => {
                   {games.map((game, index) => (
                     <tr id={`game-history-${index}`}>
                       <td>
-                        {printIcon(game)}
+                        {printIcon(game, game.player1)}
                         {`${game.player1?.substring(
                           0,
                           4
@@ -169,7 +169,7 @@ export const Games: React.FC = () => {
                       </td>
                       <td>{game.player1Points}</td>
                       <td>
-                        {printIcon(game)}
+                        {printIcon(game, game.player2)}
                         {`${game.player2?.substring(
                           0,
                           4
