@@ -15,6 +15,7 @@ import { Web3Provider } from '@ethersproject/providers'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
 import { useRouter } from 'next/router'
+import { Contract } from 'web3-eth-contract'
 
 const HQ_ABI = require('../contracts/headquarter.json')
 const { HQ_ADR } = require('../config')
@@ -27,9 +28,14 @@ export const Home = ({ projects }): JSX.Element => {
   const { library, account } = context
   const [bots, setBots] = React.useState([])
   const [botsInHQ, setBotsInHQ] = React.useState([])
-  const [iotabots, setIotabots] = React.useState([])
-  const [headquarter, setHeadquarter] = React.useState([])
   const router = useRouter()
+
+  const [iotabots, setIotabots] = React.useState<Contract | undefined>(
+    undefined
+  )
+  const [headquarter, setHeadquarter] = React.useState<Contract | undefined>(
+    undefined
+  )
 
   const init = async function (_account, _library) {
     console.log('helo')
@@ -68,6 +74,7 @@ export const Home = ({ projects }): JSX.Element => {
     let data, data2
     if (res === '0x0000000000000000000000000000000000000000') {
       data = await iotabots.methods.approve(HQ_ADR, id).send({ from: account })
+      console.log('approve', data)
       data2 = await headquarter.methods
         .deposit(id)
         .send({ from: account, gasLimit: 300000 })
@@ -76,9 +83,8 @@ export const Home = ({ projects }): JSX.Element => {
         .deposit(id)
         .send({ from: account, gasLimit: 300000 })
     }
+    console.log('deposit', data2)
     router.reload()
-    console.log('data', data)
-    console.log('data', data2)
   }
 
   React.useEffect(() => {
