@@ -9,6 +9,7 @@ import ActiveLink from '../components/ActiveLink'
 import { SEO } from '../config'
 import { Navigation } from '@iotabots/components'
 import Logo from '../components/Logo'
+import { useRouter } from 'next/router'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getLibrary = (provider: any): Web3Provider => {
@@ -17,13 +18,7 @@ const getLibrary = (provider: any): Web3Provider => {
   return library
 }
 
-const MENU = [
-  <ActiveLink href='/' label='Tokenomics' />,
-  <ActiveLink href='/metaverse' label='Metaverse' />,
-  <ActiveLink href='/game' label='Game' />,
-  <ActiveLink href='/pixelbots' label='Pixelbots' />,
-  <ActiveLink href='/chat' label='Chat' />,
-]
+
 
 const YOUR_TRACKING_ID = 'G-YTZ512CCQL'
 
@@ -31,7 +26,14 @@ const ThemeProvider = dynamic(() => import('../contexts/Theme'), { ssr: false })
 
 const App: React.FC<AppProps> = (props) => {
   const { pageProps, Component } = props
+  const { push } = useRouter()
 
+  const menuItems = [
+    { label: 'Home', onClick: () => push('/') },
+    { label: 'Headquarter', onClick: () => push('/headquarter') },
+    { label: 'How it Works', onClick: () => push('/how') },
+  ]
+  
   return (
     <>
       <Head>
@@ -81,7 +83,7 @@ const App: React.FC<AppProps> = (props) => {
       </Head>
       <ThemeProvider>
         <Web3ReactProvider getLibrary={getLibrary}>
-          <Navigation logo={<Logo />} identity menu={MENU} mobileMenu={MENU} />
+          <Navigation logo={<Logo />} identity menu={menuItems} mobileMenu={menuItems} />
           <Component {...pageProps} />
         </Web3ReactProvider>
       </ThemeProvider>

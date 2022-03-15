@@ -5,8 +5,8 @@ import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
 import { useRouter } from 'next/router'
 
-const BOLTS_ABI = require('../../contracts/bolts.json')
-const { BOLTS_ADR } = require('../../config')
+const SCREWS_ABI = require('../../contracts/screws.json')
+const { SCREWS_ADR } = require('../../config')
 
 export const RequestTokenButton: React.FC = () => {
   const context = useWeb3React<Web3Provider>()
@@ -20,7 +20,7 @@ export const RequestTokenButton: React.FC = () => {
     // @ts-ignore: Unreachable code error
     const web3 = new Web3(library.provider)
     console.log(web3, 'requestTokens')
-    let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR)
+    let contract = new web3.eth.Contract(SCREWS_ABI, SCREWS_ADR)
     let data
     try {
       data = await contract.methods
@@ -37,7 +37,7 @@ export const RequestTokenButton: React.FC = () => {
 
   const init = async function (_account, _library) {
     const web3 = new Web3(_library.provider)
-    let contract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR)
+    let contract = new web3.eth.Contract(SCREWS_ABI, SCREWS_ADR)
   }
 
   React.useEffect(() => {

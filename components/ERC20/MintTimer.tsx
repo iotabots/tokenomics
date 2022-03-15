@@ -7,8 +7,8 @@ import { Box, Typography } from '@iotabots/components'
 
 const IOTABOTS_ABI = require('../../contracts/iotabots.json')
 const { IOTABOTS_ADR } = require('../../config')
-const BOLTS_ABI = require('../../contracts/bolts.json')
-const { BOLTS_ADR } = require('../../config')
+const SCREWS_ABI = require('../../contracts/screws.json')
+const { SCREWS_ADR } = require('../../config')
 
 export const MintTimer: React.FC = () => {
   const context = useWeb3React<Web3Provider>()
@@ -26,12 +26,12 @@ export const MintTimer: React.FC = () => {
       data = await contract.methods.walletOfOwner(_account).call()
 
       console.log('data', data)
-      let boltsContract = new web3.eth.Contract(BOLTS_ABI, BOLTS_ADR)
+      let tokenContract = new web3.eth.Contract(SCREWS_ABI, SCREWS_ADR)
       let res
       let _timers = []
       for (let i = 0; i < data.length; i++) {
         console.log('id', data[i])
-        res = await boltsContract.methods.lockTime(data[i]).call()
+        res = await tokenContract.methods.lockTime(data[i]).call()
         console.log('res', res)
         if (typeof res === 'string') {
           _timers.push({
